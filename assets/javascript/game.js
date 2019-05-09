@@ -1,55 +1,107 @@
- // Declare variables
-    var wins = 0;
-    var losses = 0;
+// ------------------------------------------------------------------------------------
+// Variables
 
-// --------------------------------------------------------------------
+var wins = 0; //Increment wins, wins++
+var losses = 0; //Increment losses, losses++
+var guessLeft = 15; //Decrease guessLeft, guessLeft--
 
-// A function declared to process key strokes...
-    
-// "Press any key to get started"
-
-    document.onkeyup = function (event) {
-    
-    // event.key is a JS function that tracks which key is clicked
-
-    var userGuess = event.key;
-
-    // empty array to push event.key(letters guessed) into
-    var ltrArray = [];
-  
-    function ltrGuess() {
-
-    ltrArray.push(userGuess);
-
-    // Why did this line work?
-    
-    document.getElementById("userGuessHtml").textContent = document.getElementById("userGuessHtml").textContent +userGuess;
-
-}
-
-    ltrGuess(ltrArray);
-
-    console.log(userGuess);
-    }
-// -----------------------------------------------------------
-
-// computer word choices & randomizing them
+// computer word choices
 var compWords = ["water", "bunny", "notebook", "mirror", "porcupine"];
 
-// Why does line 53 work, but not var randWord = function() {compWords[Math.floor(Math.random(compWords) * compWords.length)];}
+// randWord will choose one of the words randomly from the word choices
 
-   // randWord will choose one of the words from compWords array.
+var randWord = compWords[Math.floor(Math.random(compWords) * compWords.length)];
 
-    var randWord = compWords[Math.floor(Math.random(compWords) * compWords.length)];
+    console.log(randWord); // Prints randWord in console to see if it works.
 
-    console.log(randWord);
+// splitWord separates chosen word into separate characters.
 
-//     // splitWord separates chosen word into characters.
+var splitWord = randWord.split(""); //[0, 1, 2, 3, 4]
 
-    var splitWord = randWord.split("");
-    console.log(splitWord);
+    console.log(splitWord); // Prints the selected word into separate characters in console.
 
-//     // Display correctly guessed letter under compChoices
+// --------------------------------------------------------------------------------------
+
+// A Javascript event for the user end interactivity with the keyboard with the document.onkeyup function.
+
+document.onkeyup = function (event) {
+    
+// event.key is a JS function that tracks which key is clicked
+
+    userGuess = event.key;
+
+// empty array to push event.key(letters guessed) into
+    // var ltrArray = [];
+
+    // ltrArray.push(userGuess); // Pushes user guesses into empty array as a string.
+
+// Displays user guesses to the right HTML elements
+    function ltrGuess() {
+        
+        // Sorts word by given index
+        // var wordSort = splitWord.sort(function(a, b) {
+        //     return a - b;
+        // });
+        // Setting HTML DOM connections
+        var userGuessHtml = document.getElementById("userGuessHtml");
+        var compChoice = document.getElementById("compChoice");
+        var winsCounter = document.getElementById("winsCounter")
+        var lossCounter = document.getElementById("lossCounter");
+        var guessCounter = document.getElementById("guessCounter");
+
+        // Runs a loop to the lentgh of the chosen word, i is a variable for the index of the length.
+        for (var i = 0; i < splitWord.length; i++) {
+
+            if (userGuess === splitWord[i])  { // if event.key is equal to word character,
+
+            // var number = 3
+            //number = number + 2
+            //number += 2
+
+            // Declaring variable userGuessHtml to grabbing the ID userGuessHtml in our HTML file.
+           
+            console.log(splitWord);
+
+            // Then display event.keys pressed.
+            userGuessHtml.textContent += userGuess;
+            
+            }
+        }
+
+        // if letters guessed are not in the chosen word string, 
+        if (userGuess !== splitWord[i]); {
+        
+        //then display letters under "letters already guessed"
+        compChoice.textContent += userGuess;
+
+        }
+
+        // Deducts guesses for each userGuess.
+        guessLeft--; 
+        
+        // if guesses left hit 0, you lose.
+        if (guessLeft < 1) {
+            
+            losses++;
+            
+        }
+        
+        // Displaying updated win/loss/guess counters on DOM.
+        winsCounter.textContent = "Wins: " + wins;
+        lossCounter.textContent = "Losses: " + losses;
+        guessCounter.textContent = "Guesses Left: " + guessLeft;
+        
+    }
+
+    ltrGuess(); // Calling the function
+        
+    console.log(userGuess); // Prints in console the letters pressed.
+}
+
+// -----------------------------------------------------------
+
+
+// Display correctly guessed letter under compChoices
 
     // var letterContain = splitWord.includes();
 
@@ -60,33 +112,11 @@ var compWords = ["water", "bunny", "notebook", "mirror", "porcupine"];
 //     function
 //     console.log(letterContain);
 
-    function displayCompLetter() {
-        if (userGuess === letterContain);
-        document.getElementById("compChoice").textContent = "Guess what word I'm thinking of: " + letterContain;
-    }
+    // function displayCompLetter() {
+    //     if (userGuess === letterContain);
+    //     document.getElementById("compChoice").textContent = "Guess what word I'm thinking of: " + letterContain;
+    // }
 
 // --------------------------------------------------------------------
 
-    // Add guesses next to previous guesses
-    // var moreGuess = document.createElement('div');
-
-    // moreGuess.textContent = userGuess;
-    
-    // displayGuess(moreGuess);
-    // if user gets computer word right...
-    // if (userGuess === randWord) {
-    //     wins++;
-    // }
-
-    // if user runs out of guesses...
-
-// a loop to run how many guesses user gets
-    // for (var userGuess = 0; userGuess < 15; userGuess++) {
-    // lossess++;
-    //     }
-    
-    // if (userGuess === compWords) {
-    //    losses++;
-    // }
-
-// --------------------------------------------------------------------  
+  
