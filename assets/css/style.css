@@ -1,0 +1,36 @@
+body {
+    background-color: #000;
+}
+
+img {
+    position: relative;
+}
+
+section {
+    font-family: 'EB Garamond', serif;
+    color: #fff;
+    float: right;
+    position: absolute;
+    right: 15%;
+    bottom: 15%;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+#userGuessHtml {
+    font-size: 36px;
+}
+
+#compChoice {
+    font-size: 36px;
+}
+
+#winsCounter, #lossCounter, #guessCounter {
+    font-size: 24px;
+}
+
+#p {
+    text-align: center;
+}
