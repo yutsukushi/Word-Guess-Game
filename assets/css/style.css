@@ -1,18 +1,25 @@
 body {
     background-color: #000;
+    margin: 0 auto;
+}
+
+.container {
+    width: 900px;
+    margin: 0 auto;
 }
 
 img {
+    width: 100%;
     position: relative;
+    margin: 0 auto;
 }
 
 section {
     font-family: 'EB Garamond', serif;
     color: #fff;
-    float: right;
+    width: 50%;
     position: absolute;
-    right: 15%;
-    bottom: 15%;
+    text-align: center;
 }
 
 h1 {

@@ -2,6 +2,7 @@
 // Variables
 
 var wordInUse = null;
+var lettersClicked = null;
 var lettersOfCurrentWord = [];
 var lettersAlreadyGuessedCorrect = [];
 var lettersAlreadyGuessed = [];
@@ -10,10 +11,8 @@ var wins = 0; //Increment wins, wins++
 var losses = 0; //Increment losses, losses++
 var guessLeft = 15; //Decrease guessLeft, guessLeft--
 
-var lettersClicked = null;
-
 // computer word choices
-var compWords = ["water", "bunny", "notebook", "mirror", "porcupine"];
+var compWords = ["water", "bunny", "notebook", "mirror", "porcupine", "flower", "leopard"];
 
 function initializeGame() {
 
@@ -66,16 +65,29 @@ function logicGame(letter) { // function that states,
 function checkCorrectLetters(letter) { // function that 
 
     for (var i = 0; i < lettersOfCurrentWord.length; i++) { // runs this for loop the amount of times of the current word length.
-
+        
         if ((letter === lettersOfCurrentWord[i]) && (lettersAlreadyGuessedCorrect.indexOf(letter) === -1)) { 
             // If the letter is inside of the array of lettersOfCurrentWord &&
             // If the letter is not inside of the lettersAlreadyGuessedCorrect
             lettersAlreadyGuessedCorrect.push(letter); // then push the letter into the already guessed correctly array.
+            
 
+        } else if ((letter === lettersOfCurrentWord[i]) && (letter === lettersAlreadyGuessedCorrect[i]))  { // This else if statement registers a win if all conditions are met.
+ 
+        // } else if (lettersOfCurrentWord.length === lettersAlreadyGuessedCorrect.length) {
+            wins++;
+
+            document.getElementById("winsCounter").innerHTML = "Wins: " +wins;
+    
+            lettersAlreadyGuessedCorrect = [];
+            lettersAlreadyGuessed = [];
+            guessLeft = 15;   
+
+            initializeGame();
         }
-
-        wonGame();
+        
     }
+
 }
 
 function displayIncorrectLetters(letter) { // If letter isn't in the lettersAlreadyGuessed array and is not lettersOfCurrentWord, then push letter to the lettersAlreadyGuessed array, then decrease guessLeft by 1.
@@ -93,17 +105,24 @@ function displayIncorrectLetters(letter) { // If letter isn't in the lettersAlre
     }
 }
 
-function wonGame() { // function to check if the correctly guessed letters equal to the letters of the current word, then increment the win counter.
+// function wonGame() { // function to check if the correctly guessed letters equal to the letters of the current word, then increment the win counter.
 
-    if (lettersAlreadyGuessedCorrect.length === lettersOfCurrentWord.length) {
+//     for (var i = 0; i < lettersOfCurrentWord.length; i++) {
+//         if ((letter === lettersOfCurrentWord[i]) && (letter === lettersAlreadyGuessedCorrect[i])) { // This else if statement registers a win if all conditions are met.
 
-        wins++;
+//             wins++;
 
-        document.getElementById("winsCounter").innerHTML = "Wins: " +wins;
+//             document.getElementById("winsCounter").innerHTML = "Wins: " +wins;
 
-    } // This code only adds a win when the word is water?
+//             lettersAlreadyGuessedCorrect = [];
+//             lettersAlreadyGuessed = [];
+//             guessLeft = 15;   
 
-}
+//             initializeGame();
+//         }
+//     }
+// }
+
 
 function loseGame() { 
 
@@ -113,15 +132,16 @@ function loseGame() {
 
         document.getElementById("lossCounter").innerHTML = "Losses: " +losses;
         document.getElementById("guessCounter").innerHTML = "Out of guesses. You lost.";
-
-        lettersAlreadyGuessedCorrect.length = [];
-        lettersAlreadyGuessed.length = [];
-
-        initializeGame();
         
-
+        lettersAlreadyGuessedCorrect = [];
+        lettersAlreadyGuessed = [];
+        guessLeft = 15;   
+        
     } 
-    
+
+    document.getElementById("compChoice").innerHTML = lettersAlreadyGuessed;
+
+    initializeGame();
 }
 
 initializeGame(); //every time a page loads, run the initializeGame function/
@@ -177,10 +197,6 @@ document.onkeyup = function (event) {
     //     for (var i = 0; i < wordInUse.length; i++) {
 
     //         if (userGuess === wordInUse[i])  { // if event.key is equal to word character,
-
-    //         // var number = 3
-    //         //number = number + 2
-    //         //number += 2
 
     //         // Declaring variable userGuessHtml to grabbing the ID userGuessHtml in our HTML file.
            
